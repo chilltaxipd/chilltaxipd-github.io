@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="sk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chill Taxi - Jazdíme pohodovo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #1a3674; /* Tmavomodrá */
+            --primary-light: #2c52a8;
+            --secondary-color: #9cd7ee; /* Svetlomodrá */
+            --accent-color: #f8b400; /* Žltá */
+            --text-dark: #1e2022;
+            --text-muted: #677788;
+            --bg-light: #f8fafd;
+            --box-shadow: 0 15px 35px rgba(26, 54, 116, 0.1);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* --- TYPOGRAPHY & GENERAL --- */
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            color: var(--primary-color);
+            letter-spacing: -0.5px;
+        }
+        
+        .section-padding {
+            padding: 100px 0;
+        }
+        
+        .badge-custom {
+            background-color: rgba(156, 215, 238, 0.3);
+            color: var(--primary-color);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        /* --- BUTTONS --- */
+        .btn-primary-custom {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            border: none;
+            padding: 14px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            box-shadow: 0 10px 20px rgba(248, 180, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn-primary-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(248, 180, 0, 0.4);
+            background-color: #ffc107;
+            color: var(--primary-color);
+        }
+
+        /* --- NAVBAR --- */
+        .navbar {
+            padding: 20px 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+        }
+        .navbar-brand img {
+            height: 50px;
+        }
+        .nav-link {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 0 12px;
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent-color);
+            bottom: 0;
+            left: 0;
+            transition: 0.3s;
+        }
+        .nav-link:hover::after { width: 100%; }
+
+        /* --- HERO SECTION --- */
+        #hero {
+            padding-top: 160px;
+            padding-bottom: 100px;
+            background: linear-gradient(180deg, #ffffff 0%, #f0f5ff 100%);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .bg-shape {
+            position: absolute;
+            border-radius: 50%;
+            z-index: 0;
+        }
+        .shape-1 {
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(156, 215, 238, 0.2) 0%, rgba(255,255,255,0) 70%);
+            top: -100px; right: -100px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 25px;
+        }
+        
+        /* ANIMÁCIA AUTA PEUGEOT */
+        .car-container {
+            position: relative;
+            height: 450px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1000px;
+        }
+        
+        .peugeot-car {
+            max-width: 120%;
+            width: 750px;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.2));
+            z-index: 2;
+            animation: driveIn 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) forwards,
+                       runCar 0.8s ease-in-out infinite alternate 1.5s;
+        }
+
+        @keyframes driveIn {
+            from { transform: translateX(100%) scale(0.8); opacity: 0; }
+            to { transform: translateX(0) scale(1); opacity: 1; }
+        }
+
+        @keyframes runCar {
+            from { transform: translateY(0px); }
+            to { transform: translateY(-3px); } 
+        }
+
+        /* --- SEKIA 1: LETISKOVÉ TRANSFERY --- */
+        #airport-transfer {
+            background-color: white;
+            position: relative;
+            z-index: 1;
+        }
+        .feature-card {
+            padding: 30px;
+            border-radius: 20px;
+            background: white;
+            border: 1px solid rgba(0,0,0,0.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: 0.3s;
+            height: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--secondary-color);
+        }
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(26, 54, 116, 0.1);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        /* --- SEKCIA: BOLT (MODRÁ) --- */
+        #bolt-service {
+            background-color: var(--primary-color);
+            color: white;
+            position: relative;
+            overflow: hidden;
+            /* Extra margin pre oddelenie od sekcie nad ním */
+            margin-top: 50px;
+        }
+        #bolt-service h2 { color: white; }
+        #bolt-service p { color: rgba(255,255,255,0.8); }
+        
+        .bolt-badge {
+            background: #34d186; 
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+        
+        .bolt-img-container {
+            position: relative;
+        }
+        .bolt-img-container::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+        }
+
+        /* Kontakt v Bolt sekcii */
+        .bolt-contact-box {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            border-left: 4px solid var(--accent-color);
+        }
+        .bolt-contact-link {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .bolt-contact-link:hover {
+            color: var(--accent-color);
+        }
+        
+        /* --- PRICING --- */
+        .pricing-card {
+            background: white;
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: 0.3s;
+        }
+        .pricing-card:hover {
+            transform: scale(1.03);
+            border-color: var(--accent-color);
+        }
+        .pricing-card.popular {
+            background: linear-gradient(145deg, #ffffff, #f0f7ff);
+            border: 2px solid var(--accent-color);
+            position: relative;
+        }
+        .price-tag {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            margin: 15px 0;
+        }
+        
+        /* --- RECRUITMENT --- */
+        #recruitment {
+            background-color: var(--bg-light);
+            position: relative;
+        }
+        .recruit-box {
+            background: white;
+            padding: 50px;
+            border-radius: 30px;
+            box-shadow: var(--box-shadow);
+            position: relative;
+            z-index: 10;
+        }
+        .hand-image {
+            position: absolute;
+            left: -160px;
+            top: 50%;
+            transform: translateY(-50%) rotate(-10deg);
+            width: 200px;
+            z-index: 1;
+            display: block;
+        }
+        @media (max-width: 991px) {
+            .hand-image { display: none; }
+            .hero-content { text-align: center; }
+            .car-container { height: 300px; }
+            .peugeot-car { width: 100%; }
+        }
+
+        footer {
+            background: #111;
+            color: #aaa;
+            padding: 60px 0 20px;
+        }
+        footer h5 { color: white; margin-bottom: 20px; }
+        footer a { color: #aaa; text-decoration: none; }
+        footer a:hover { color: var(--accent-color); }
+
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="logo.png" alt="Chill Taxi">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto align-items-center">
+                    <li class="nav-item"><a class="nav-link" href="#airport-transfer">Letiskové transfery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pricing">Cenník</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#bolt-service">Bolt</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Kontakt</a></li>
+                    <li class="nav-item ms-3">
+                        <a href="#recruitment" class="btn btn-primary-custom">Staň sa vodičom</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="hero">
+        <div class="bg-shape shape-1"></div>
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-5 hero-content" data-aos="fade-right">
+                    <span class="badge-custom"><i class="fas fa-star me-1"></i> Jazdíme pohodovo</span>
+                    <h1>Tvoja cesta na letisko začína u nás.</h1>
+                    <p class="lead text-muted mb-4">Spoľahlivé letiskové transfery z Prievidze a okolia. Presnosť a komfort sú pre nás prioritou.</p>
+                    <div class="d-flex gap-3 justify-content-lg-start justify-content-center">
+                        <a href="#contact" class="btn btn-primary-custom">Objednať odvoz</a>
+                        <a href="#pricing" class="btn btn-outline-primary rounded-pill px-4 py-3 fw-bold">Pozrieť cenník</a>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="car-container">
+                        <img src="peugeot.png" alt="Chill Taxi Peugeot 5008" class="peugeot-car">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="airport-transfer" class="section-padding">
+        <div class="container">
+            <div class="row mb-5 align-items-end">
+                <div class="col-lg-8" data-aos="fade-up">
+                    <h5 class="text-uppercase text-primary">Prémiová služba</h5>
+                    <h2 class="display-5">Letiskové odvozy bez stresu</h2>
+                    <p class="lead text-muted">Let na dovolenku alebo služobná cesta? S Chill Taxi máš istotu, že na letisko dorazíš včas, v čistom aute a s profesionálnym vodičom.</p>
+                </div>
+                <div class="col-lg-4 text-lg-end" data-aos="fade-left">
+                    <i class="fas fa-plane-departure text-primary opacity-25" style="font-size: 5rem;"></i>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-clock"></i></div>
+                        <h4>Presnosť na minútu</h4>
+                        <p>Jazdy plánujeme s dostatočnou rezervou. Sledujeme dopravnú situáciu, aby ste svoj let stihli v pokoji.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-suitcase-rolling"></i></div>
+                        <h4>Komfort a priestor</h4>
+                        <p>Náš Peugeot 5008 ponúka nadštandardný priestor pre posádku aj veľkú batožinu. Cestujte pohodlne.</p>
+                    </div>
+                </div>
+                <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-card">
+                        <div class="feature-icon"><i class="fas fa-user-tie"></i></div>
+                        <h4>Profi prístup</h4>
+                        <p>Vodič vás vyzdvihne priamo na adrese, pomôže s batožinou a zabezpečí plynulú a bezpečnú jazdu.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5" data-aos="fade-up">
+                <h5 class="text-uppercase text-primary">Transparentné ceny</h5>
+                <h2>Koľko stojí letiskový transfer?</h2>
+                <p class="text-muted">Ceny sú konečné, za celé auto (nie za osobu).</p>
+            </div>
+            
+            <div class="row justify-content-center g-4">
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="pricing-card">
+                        <h4>Bratislava (BTS)</h4>
+                        <div class="price-tag">100 €</div>
+                        <ul class="list-unstyled text-muted mb-4">
+                            <li><i class="fas fa-check text-primary me-2"></i> Vyzdvihnutie na adrese</li>
+                            <li><i class="fas fa-check text-primary me-2"></i> Batožina v cene</li>
+                            <li><i class="fas fa-check text-primary me-2"></i> Jednosmerná cesta</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline-primary rounded-pill w-100">Objednať</a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="pricing-card popular">
+                        <span class="position-absolute top-0 start-50 translate-middle badge bg-warning text-dark px-3 py-2 rounded-pill">Najžiadanejšie</span>
+                        <h4>Viedeň (Schwechat)</h4>
+                        <div class="price-tag">130 €</div>
+                        <ul class="list-unstyled text-muted mb-4">
+                            <li><i class="fas fa-check text-primary me-2"></i> Vyzdvihnutie na adrese</li>
+                            <li><i class="fas fa-check text-primary me-2"></i> Batožina v cene</li>
+                            <li><i class="fas fa-check text-primary me-2"></i> Komfortná jazda</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-primary-custom w-100">Objednať</a>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="pricing-card">
+                        <h4>Budapešť (BUD)</h4>
+                        <div class="price-tag">150 €</div>
+                        <ul class="list-unstyled text-muted mb-4">
+                            <li><i class="fas fa-check text-primary me-2"></i> Vyzdvihnutie na adrese</li>
+                            <li><i class="fas fa-check text-primary me-2"></i> Batožina v cene</li>
+                            <li><i class="fas fa-check text-primary me-2"></i> Jednosmerná cesta</li>
+                        </ul>
+                        <a href="#contact" class="btn btn-outline-primary rounded-pill w-100">Objednať</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4 text-muted small">
+                Ostatné destinácie naceňujeme individuálne. Kontaktujte nás.
+            </div>
+        </div>
+    </section>
+
+    <section id="bolt-service" class="section-padding">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 order-2 order-lg-1" data-aos="fade-right">
+                    <div class="bolt-img-container text-center">
+                        <img src="https://images.unsplash.com/photo-1449965408869-eaa3f722e40d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="City Driving" class="img-fluid rounded-4 shadow-lg" style="position:relative; z-index:1;">
+                    </div>
+                </div>
+                <div class="col-lg-6 order-1 order-lg-2 ps-lg-5 mb-5 mb-lg-0" data-aos="fade-left">
+                    <span class="bolt-badge">Oficiálny partner</span>
+                    <h2 class="display-5 mb-3">Mestská preprava cez aplikáciu Bolt</h2>
+                    <p class="lead mb-4">Potrebuješ sa rýchlo presunúť v rámci mesta? Sme hrdou súčasťou platformy Bolt.</p>
+                    
+                    <ul class="list-unstyled text-white-50">
+                        <li class="mb-3 d-flex align-items-center"><i class="fas fa-check-circle text-warning me-3 fa-lg"></i> Dostupné v Prievidzi a okolí</li>
+                        <li class="mb-3 d-flex align-items-center"><i class="fas fa-check-circle text-warning me-3 fa-lg"></i> Jednoduché objednanie cez appku</li>
+                        <li class="mb-3 d-flex align-items-center"><i class="fas fa-check-circle text-warning me-3 fa-lg"></i> Férové ceny a transparentnosť</li>
+                    </ul>
+                    
+                    <p class="mt-4 fst-italic text-white border-start border-warning border-4 ps-3">
+                        "Naše autá sú vždy čisté a vodiči jazdia s úsmevom. To je štandard Chill Taxi."
+                    </p>
+
+                    <div class="bolt-contact-box">
+                        <h5 class="mb-2 text-white">Máte otázky alebo problém s objednávkou?</h5>
+                        <p class="small text-white-50 mb-3">Sme tu pre vás. Zavolajte nám.</p>
+                        <a href="tel:0915881106" class="bolt-contact-link"><i class="fas fa-phone-alt me-2 text-warning"></i> 0915 881 106</a>
+                        <a href="mailto:chilltaxipd@gmail.com" class="bolt-contact-link"><i class="fas fa-envelope me-2 text-warning"></i> chilltaxipd@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="recruitment" class="section-padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="recruit-box">
+                        <img src="pointing-hand.png" alt="Ukazujúca ruka" class="hand-image" data-aos="fade-right">
+                        
+                        <div class="row align-items-center">
+                            <div class="col-lg-5 mb-4 mb-lg-0">
+                                <h3 class="mb-3">Pridaj sa k nám!</h3>
+                                <p class="mb-4">Hľadáme vodičov s vlastným autom pre našu flotilu v aplikácii Bolt. Pomôžeme ti s papiermi a začiatkom.</p>
+                                <div class="d-flex align-items-center text-muted">
+                                    <i class="fas fa-car fa-2x me-3 text-primary"></i>
+                                    <span>Podmienka: Vlastné vozidlo</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-7">
+                                <form class="p-3 bg-light rounded-4">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control border-0 py-3" placeholder="Meno a Priezvisko" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="tel" class="form-control border-0 py-3" placeholder="Tel. číslo" required>
+                                        </div>
+                                        <div class="col-12">
+                                            <input type="text" class="form-control border-0 py-3" placeholder="Typ auta (Model a rok výroby)">
+                                        </div>
+                                        <div class="col-12">
+                                            <button type="submit" class="btn btn-primary-custom w-100">Odoslať záujem</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="row gy-5">
+                <div class="col-lg-4">
+                    <img src="logo.png" alt="Chill Taxi Logo" style="height: 40px; filter: brightness(0) invert(1); margin-bottom: 25px;">
+                    <p>Profesionálna taxislužba v Prievidzi a okolí. Špecialista na letiskové transfery a partner platformy Bolt.</p>
+                </div>
+                <div class="col-lg-4 offset-lg-1">
+                    <h5>Kontaktujte nás</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-3"><a href="tel:0915881106" class="fs-5 fw-bold text-white"><i class="fas fa-phone-alt me-2 text-warning"></i> 0915 881 106</a></li>
+                        <li class="mb-3"><a href="tel:0918497242" class="fs-5 fw-bold text-white"><i class="fas fa-phone-alt me-2 text-warning"></i> 0918 497 242</a></li>
+                        <li><a href="mailto:chilltaxipd@gmail.com"><i class="fas fa-envelope me-2 text-warning"></i> chilltaxipd@gmail.com</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h5>Lokalita</h5>
+                    <p><i class="fas fa-map-marker-alt text-warning me-2"></i> Prievidza a okolie</p>
+                    <p><i class="fas fa-road text-warning me-2"></i> Celá EÚ (Transfery)</p>
+                </div>
+            </div>
+            <div class="border-top border-secondary mt-5 pt-4 text-center">
+                <small>&copy; 2023 Chill Taxi. Všetky práva vyhradené.</small>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            offset: 100,
+            once: true
+        });
+
+        // Navbar scroll efekt
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 50) {
+                document.querySelector('.navbar').classList.add('shadow-sm');
+            } else {
+                document.querySelector('.navbar').classList.remove('shadow-sm');
+            }
+        });
+    </script>
+</body>
+</html>
