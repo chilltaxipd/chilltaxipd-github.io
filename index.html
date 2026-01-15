@@ -2,7 +2,7 @@
 <html lang="sk">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Chill Taxi - Jazdíme pohodovo</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -21,10 +21,13 @@
             --box-shadow: 0 15px 35px rgba(26, 54, 116, 0.1);
         }
 
-        body {
+        /* --- MOBILNÁ OPTIMALIZÁCIA (ZÁKLAD) --- */
+        html, body {
             font-family: 'Poppins', sans-serif;
             color: var(--text-dark);
-            overflow-x: hidden;
+            overflow-x: hidden; /* Zabráni horizontálnemu posunu na mobile */
+            width: 100%;
+            position: relative;
         }
 
         /* --- TYPOGRAPHY & GENERAL --- */
@@ -36,6 +39,15 @@
         
         .section-padding {
             padding: 100px 0;
+        }
+        
+        /* Úprava paddingu pre mobily */
+        @media (max-width: 768px) {
+            .section-padding {
+                padding: 60px 0;
+            }
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
         }
         
         .badge-custom {
@@ -71,7 +83,7 @@
 
         /* --- NAVBAR --- */
         .navbar {
-            padding: 20px 0;
+            padding: 15px 0;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 20px rgba(0,0,0,0.05);
@@ -79,7 +91,7 @@
         /* Štýl pre TEXTOVÉ LOGO */
         .logo-text {
             font-family: 'Poppins', sans-serif;
-            font-weight: 800; /* Extra hrubé */
+            font-weight: 800; 
             font-size: 1.8rem;
             color: var(--primary-color);
             text-transform: uppercase;
@@ -87,6 +99,11 @@
             display: flex;
             align-items: center;
         }
+        /* Zmenšenie loga na mobile */
+        @media (max-width: 576px) {
+            .logo-text { font-size: 1.5rem; }
+        }
+
         .nav-link {
             font-weight: 600;
             color: var(--primary-color);
@@ -107,7 +124,7 @@
 
         /* --- HERO SECTION --- */
         #hero {
-            padding-top: 160px;
+            padding-top: 140px;
             padding-bottom: 100px;
             background: linear-gradient(180deg, #ffffff 0%, #f0f5ff 100%);
             overflow: hidden;
@@ -319,11 +336,13 @@
             z-index: 1;
             display: block;
         }
+        /* Mobile responsive úpravy pre obrázky */
         @media (max-width: 991px) {
             .hand-image { display: none; }
             .hero-content { text-align: center; }
-            .car-container { height: 300px; }
+            .car-container { height: 300px; margin-top: 30px; }
             .peugeot-car { width: 100%; }
+            .bolt-img-container { margin-bottom: 30px; }
         }
 
         footer {
@@ -560,7 +579,8 @@
 
                         <div class="calendly-inline-widget" data-url="https://calendly.com/naodova1983/rezervacia-chill-taxi" style="min-width:320px;height:700px;"></div>
                         <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>
