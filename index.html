@@ -76,10 +76,16 @@
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 20px rgba(0,0,0,0.05);
         }
-        .navbar-brand img {
-            height: 50px;
-            /* Pridané aby sa logo nedeformovalo */
-            width: auto; 
+        /* Štýl pre TEXTOVÉ LOGO */
+        .logo-text {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800; /* Extra hrubé */
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            display: flex;
+            align-items: center;
         }
         .nav-link {
             font-weight: 600;
@@ -390,7 +396,9 @@
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="https://github.com/chilltaxipd/chilltaxipd-github.io/blob/main/taxilogo.jpg?raw=true" alt="Chill Taxi">
+                <span class="logo-text">
+                    CHILL TAXI
+                </span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
                 <span class="navbar-toggler-icon"></span>
@@ -640,7 +648,9 @@
         <div class="container">
             <div class="row gy-5">
                 <div class="col-lg-4">
-                    <img src="https://github.com/chilltaxipd/chilltaxipd-github.io/blob/main/taxilogo.jpg?raw=true" alt="Chill Taxi Logo" style="height: 40px; filter: brightness(0) invert(1); margin-bottom: 25px; width: auto;">
+                    <span class="logo-text text-white" style="filter: brightness(0) invert(1); margin-bottom: 25px; display:inline-block;">
+                        CHILL TAXI
+                    </span>
                     <p>Profesionálna taxislužba v Prievidzi a okolí. Špecialista na letiskové transfery a partner platformy Bolt.</p>
                 </div>
                 <div class="col-lg-4 offset-lg-1">
@@ -658,7 +668,7 @@
                 </div>
             </div>
             <div class="border-top border-secondary mt-5 pt-4 text-center">
-                <small>&copy; 2023 Chill Taxi. Všetky práva vyhradené.</small>
+                <small>&copy; 2026 Chill Taxi. Všetky práva vyhradené.</small>
             </div>
         </div>
     </footer>
