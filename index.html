@@ -21,16 +21,14 @@
             --box-shadow: 0 15px 35px rgba(26, 54, 116, 0.1);
         }
 
-        /* --- MOBILNÁ OPTIMALIZÁCIA (ZÁKLAD) --- */
         html, body {
             font-family: 'Poppins', sans-serif;
             color: var(--text-dark);
-            overflow-x: hidden; /* Zabráni horizontálnemu posunu na mobile */
+            overflow-x: hidden;
             width: 100%;
             position: relative;
         }
 
-        /* --- TYPOGRAPHY & GENERAL --- */
         h1, h2, h3, h4 {
             font-weight: 700;
             color: var(--primary-color);
@@ -40,14 +38,12 @@
         .section-padding {
             padding: 100px 0;
         }
-        
-        /* Úprava paddingu pre mobily */
+
         @media (max-width: 768px) {
-            .section-padding {
-                padding: 60px 0;
-            }
-            h1 { font-size: 2.5rem; }
-            h2 { font-size: 2rem; }
+            .section-padding { padding: 50px 0; }
+            h1 { font-size: 2.2rem; }
+            h2 { font-size: 1.8rem; }
+            .bg-shape { display: none; }
         }
         
         .badge-custom {
@@ -84,11 +80,10 @@
         /* --- NAVBAR --- */
         .navbar {
             padding: 15px 0;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
             box-shadow: 0 2px 20px rgba(0,0,0,0.05);
         }
-        /* Štýl pre TEXTOVÉ LOGO */
         .logo-text {
             font-family: 'Poppins', sans-serif;
             font-weight: 800; 
@@ -99,9 +94,8 @@
             display: flex;
             align-items: center;
         }
-        /* Zmenšenie loga na mobile */
         @media (max-width: 576px) {
-            .logo-text { font-size: 1.5rem; }
+            .logo-text { font-size: 1.4rem; }
         }
 
         .nav-link {
@@ -124,8 +118,8 @@
 
         /* --- HERO SECTION --- */
         #hero {
-            padding-top: 140px;
-            padding-bottom: 100px;
+            padding-top: 130px;
+            padding-bottom: 80px;
             background: linear-gradient(180deg, #ffffff 0%, #f0f5ff 100%);
             overflow: hidden;
             position: relative;
@@ -148,7 +142,6 @@
             margin-bottom: 25px;
         }
         
-        /* ANIMÁCIA AUTA PEUGEOT */
         .car-container {
             position: relative;
             height: 450px;
@@ -177,13 +170,26 @@
             to { transform: translateY(-3px); } 
         }
 
-        /* --- SEKIA 1: LETISKOVÉ TRANSFERY --- */
-        #airport-transfer {
-            background-color: white;
-            position: relative;
-            z-index: 1;
+        /* --- OPRAVA AUTA PRE MOBIL (BEZ ANIMÁCIE) --- */
+        @media (max-width: 991px) {
+            .hero-content { text-align: center; }
+            .hero-content .d-flex { justify-content: center !important; }
+            .car-container { 
+                height: auto; 
+                margin-top: 40px; 
+                overflow: hidden; 
+            }
+            .peugeot-car { 
+                width: 100%; 
+                max-width: 400px; 
+                animation: none !important;
+                transform: none !important;
+                opacity: 1 !important;
+            }
         }
-        .feature-card {
+
+        /* --- SEKCIA: OSTATNÉ KARTY --- */
+        .feature-card, .pricing-card {
             padding: 30px;
             border-radius: 20px;
             background: white;
@@ -192,24 +198,23 @@
             transition: 0.3s;
             height: 100%;
         }
-        .feature-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--secondary-color);
-        }
         .feature-icon {
-            width: 60px;
-            height: 60px;
+            width: 60px; height: 60px;
             background: rgba(26, 54, 116, 0.1);
             border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-color);
-            font-size: 1.5rem;
-            margin-bottom: 20px;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--primary-color); font-size: 1.5rem; margin-bottom: 20px;
+        }
+        .pricing-card.popular {
+            background: linear-gradient(145deg, #ffffff, #f0f7ff);
+            border: 2px solid var(--accent-color);
+            position: relative;
+        }
+        .price-tag {
+            font-size: 3rem; font-weight: 800; color: var(--primary-color); margin: 15px 0;
         }
 
-        /* --- SEKCIA: BOLT (MODRÁ) --- */
+        /* --- SEKCIA: BOLT --- */
         #bolt-service {
             background-color: var(--primary-color);
             color: white;
@@ -219,194 +224,142 @@
         }
         #bolt-service h2 { color: white; }
         #bolt-service p { color: rgba(255,255,255,0.8); }
-        
         .bolt-badge {
-            background: #34d186; 
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-weight: 700;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            display: inline-block;
+            background: #34d186; color: white; padding: 5px 15px; border-radius: 20px;
+            font-weight: 700; font-size: 0.8rem; text-transform: uppercase;
+            margin-bottom: 15px; display: inline-block;
         }
-        
-        .bolt-img-container {
-            position: relative;
-        }
+        .bolt-img-container { position: relative; }
         .bolt-img-container::before {
-            content: '';
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            z-index: 0;
+            content: ''; position: absolute; width: 300px; height: 300px;
+            background: rgba(255,255,255,0.1); border-radius: 50%;
+            top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 0;
         }
-
-        /* Kontakt v Bolt sekcii */
         .bolt-contact-box {
-            background: rgba(255,255,255,0.1);
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 30px;
-            border-left: 4px solid var(--accent-color);
+            background: rgba(255,255,255,0.1); border-radius: 15px; padding: 20px;
+            margin-top: 30px; border-left: 4px solid var(--accent-color);
         }
         .bolt-contact-link {
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s;
-            display: block;
-            margin-bottom: 5px;
-        }
-        .bolt-contact-link:hover {
-            color: var(--accent-color);
-        }
-        
-        /* --- PRICING --- */
-        .pricing-card {
-            background: white;
-            border-radius: 25px;
-            padding: 40px;
-            text-align: center;
-            box-shadow: var(--box-shadow);
-            border: 1px solid rgba(0,0,0,0.05);
-            transition: 0.3s;
-        }
-        .pricing-card:hover {
-            transform: scale(1.03);
-            border-color: var(--accent-color);
-        }
-        .pricing-card.popular {
-            background: linear-gradient(145deg, #ffffff, #f0f7ff);
-            border: 2px solid var(--accent-color);
-            position: relative;
-        }
-        .price-tag {
-            font-size: 3rem;
-            font-weight: 800;
-            color: var(--primary-color);
-            margin: 15px 0;
+            color: white; text-decoration: none; font-weight: 600;
+            transition: 0.3s; display: block; margin-bottom: 5px;
         }
 
         /* --- REZERVÁCIA (CALENDLY) --- */
-        #reservation {
-            background-color: var(--bg-light);
-        }
+        #reservation { background-color: var(--bg-light); }
         .reservation-box {
-            background: white;
-            padding: 20px;
-            border-radius: 25px;
-            box-shadow: var(--box-shadow);
-            border-top: 5px solid var(--primary-color);
-            overflow: hidden; /* Aby iframe nepretekal */
+            background: white; padding: 15px; border-radius: 25px;
+            box-shadow: var(--box-shadow); border-top: 5px solid var(--primary-color);
+            overflow: hidden; 
         }
         .warning-box {
-            background: rgba(248, 180, 0, 0.15);
-            border-left: 4px solid var(--accent-color);
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 30px;
+            background: rgba(248, 180, 0, 0.15); border-left: 4px solid var(--accent-color);
+            padding: 15px; border-radius: 10px; margin-bottom: 20px;
         }
         
         /* --- RECRUITMENT --- */
-        #recruitment {
-            background-color: white;
-            position: relative;
-        }
+        #recruitment { background-color: white; position: relative; }
         .recruit-box {
-            background: var(--bg-light);
-            padding: 50px;
-            border-radius: 30px;
-            box-shadow: var(--box-shadow);
-            position: relative;
-            z-index: 10;
+            background: var(--bg-light); padding: 40px 20px; border-radius: 30px;
+            box-shadow: var(--box-shadow); position: relative; z-index: 10;
         }
         .hand-image {
-            position: absolute;
-            left: -160px;
-            top: 50%;
-            transform: translateY(-50%) rotate(-10deg);
-            width: 200px;
-            z-index: 1;
-            display: block;
+            position: absolute; left: -160px; top: 50%;
+            transform: translateY(-50%) rotate(-10deg); width: 200px;
+            z-index: 1; display: block;
         }
-        /* Mobile responsive úpravy pre obrázky */
         @media (max-width: 991px) {
             .hand-image { display: none; }
-            .hero-content { text-align: center; }
-            .car-container { height: 300px; margin-top: 30px; }
-            .peugeot-car { width: 100%; }
             .bolt-img-container { margin-bottom: 30px; }
         }
 
         footer {
-            background: #111;
-            color: #aaa;
-            padding: 60px 0 20px;
+            background: #111; color: #aaa; padding: 60px 0 20px;
         }
         footer h5 { color: white; margin-bottom: 20px; }
         footer a { color: #aaa; text-decoration: none; }
         footer a:hover { color: var(--accent-color); }
 
-        /* --- COOKIE BANNER --- */
+        /* --- COOKIE BANNER (OKAMŽITÉ NAČÍTANIE) --- */
         .cookie-banner {
             position: fixed;
-            bottom: -100%; /* Skryté */
+            bottom: -100%; 
             left: 0;
             width: 100%;
             background: white;
-            padding: 25px 0;
-            box-shadow: 0 -5px 25px rgba(0,0,0,0.1);
+            padding: 20px 0;
+            box-shadow: 0 -5px 25px rgba(0,0,0,0.15);
             z-index: 9999;
-            transition: bottom 0.5s ease-in-out;
+            transition: bottom 0.4s ease-in-out;
             border-top: 4px solid var(--accent-color);
         }
         .cookie-banner.show {
             bottom: 0;
         }
 
-        /* --- PROMO TOAST --- */
+        /* --- PROMO TOAST (FIX PRE MOBILY) --- */
         .promo-box {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
+            bottom: 30px; 
+            right: 20px;
             width: 320px;
             background: white;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.25);
             border-radius: 15px;
-            padding: 25px;
-            z-index: 9990; 
+            padding: 20px;
+            z-index: 9990; /* Pod cookies */
             border-left: 5px solid var(--accent-color);
-            transform: translateX(120%); /* Skryté vpravo */
+            
+            /* Predvolene skryté vpravo */
+            transform: translateX(150%);
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: block;
         }
         .promo-box.active {
-            transform: translateX(0); /* Vysunuté */
+            transform: translateX(0);
         }
+        
+        /* Špecifické nastavenie pre mobily */
+        @media(max-width: 576px) {
+            .promo-box {
+                width: 90%; /* Nie na celú šírku, ale takmer */
+                left: 5%; /* Centrovanie: 5% zľava + 90% šírka = 5% sprava */
+                right: auto;
+                bottom: 20px;
+            }
+        }
+        
         .promo-box .close-btn {
             position: absolute;
             top: 10px; right: 15px;
             font-size: 1.2rem;
             color: #ccc;
             cursor: pointer;
-            transition: 0.3s;
         }
-        .promo-box .close-btn:hover { color: var(--text-dark); }
+
+        /* --- ŠTÝLY PRE RECENZIE --- */
+        #reviews { background-color: #f8fafd; }
+        .review-card {
+            background: white; border-radius: 20px; padding: 25px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-bottom: 20px;
+            border-left: 5px solid transparent; transition: 0.3s;
+        }
+        .review-card:hover { border-left-color: var(--accent-color); transform: translateX(5px); }
+        .stars { color: var(--accent-color); margin-bottom: 10px; }
         
-        @media(max-width: 576px) {
-            .promo-box {
-                width: 90%;
-                right: 5%;
-                bottom: 20px;
-            }
+        .review-form-box {
+            background: var(--primary-color); color: white; padding: 30px;
+            border-radius: 20px;
         }
+        
+        /* Star Rating System */
+        .star-rating {
+            direction: rtl; display: inline-flex; font-size: 2rem; padding: 0; border: none;
+        }
+        .star-rating input { display: none; }
+        .star-rating label { color: #ddd; cursor: pointer; padding: 0 5px; transition: color 0.2s; }
+        .star-rating input:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label { color: var(--accent-color); }
 
     </style>
 </head>
@@ -415,9 +368,7 @@
     <nav class="navbar navbar-expand-lg fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <span class="logo-text">
-                    CHILL TAXI
-                </span>
+                <span class="logo-text">CHILL TAXI</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
                 <span class="navbar-toggler-icon"></span>
@@ -427,6 +378,7 @@
                     <li class="nav-item"><a class="nav-link" href="#airport-transfer">Letiskové transfery</a></li>
                     <li class="nav-item"><a class="nav-link" href="#pricing">Cenník</a></li>
                     <li class="nav-item"><a class="nav-link" href="#reservation">Rezervácia</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#reviews">Recenzie</a></li>
                     <li class="nav-item"><a class="nav-link" href="#bolt-service">Bolt</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Kontakt</a></li>
                     <li class="nav-item ms-3">
@@ -465,7 +417,7 @@
                 <div class="col-lg-8" data-aos="fade-up">
                     <h5 class="text-uppercase text-primary">Prémiová služba</h5>
                     <h2 class="display-5">Letiskové odvozy bez stresu</h2>
-                    <p class="lead text-muted">Let na dovolenku alebo služobná cesta? S Chill Taxi máš istotu, že na letisko dorazíš včas, v čistom aute a s profesionálnym vodičom.</p>
+                    <p class="lead text-muted">Let na dovolenku alebo služobnú cestu? S Chill Taxi máš istotu, že na letisko dorazíš včas, v čistom aute a s profesionálnym vodičom.</p>
                 </div>
                 <div class="col-lg-4 text-lg-end" data-aos="fade-left">
                     <i class="fas fa-plane-departure text-primary opacity-25" style="font-size: 5rem;"></i>
@@ -503,7 +455,7 @@
             <div class="text-center mb-5" data-aos="fade-up">
                 <h5 class="text-uppercase text-primary">Transparentné ceny</h5>
                 <h2>Koľko stojí letiskový transfer?</h2>
-                <p class="text-muted">Ceny sú konečné, za celé auto (nie za osobu).</p>
+                <p class="text-muted">Ceny sú konečné za celé auto (nie za osobu).</p>
             </div>
             
             <div class="row justify-content-center g-4">
@@ -571,7 +523,7 @@
                                     <h5 class="fw-bold text-dark mb-1">Dôležité: Plánujte s rezervou!</h5>
                                     <p class="mb-0 text-muted small">
                                         Cesta do Bratislavy alebo Viedne môže trvať 2 až 3 hodiny. 
-                                        <strong>Odporúčame rezervovať si čas vyzdvihnutia aspoň 5 hodín pred vaším odletom.</strong>
+                                        <strong>Odporúčame rezervovať si čas vyzdvihnutia aspoň 5 dní pred vaším odletom.</strong>
                                     </p>
                                 </div>
                             </div>
@@ -580,6 +532,62 @@
                         <div class="calendly-inline-widget" data-url="https://calendly.com/naodova1983/rezervacia-chill-taxi" style="min-width:320px;height:700px;"></div>
                         <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h5 class="text-uppercase text-primary">Skúsenosti klientov</h5>
+                    <h2 class="mb-4">Čo o nás hovoria?</h2>
+                    
+                    <div id="reviews-container">
+                        <div class="review-card">
+                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="mb-2">"Super odvoz, pán vodič bol presný a veľmi milý. Auto čisté a pohodlné. Odporúčam!"</p>
+                            <small class="text-muted fw-bold">- Peter K.</small>
+                        </div>
+                        <div class="review-card">
+                            <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                            <p class="mb-2">"Využila som transfer na letisko Schwechat. Všetko prebehlo hladko, žiadny stres. Ďakujem."</p>
+                            <small class="text-muted fw-bold">- Mária S.</small>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="review-form-box">
+                        <h3 class="text-white mb-3">Napíšte nám recenziu</h3>
+                        <p class="text-white-50 mb-4">Vaša spokojnosť je pre nás dôležitá.</p>
+                        
+                        <form id="reviewForm">
+                            <input type="hidden" name="_subject" value="NOVÁ RECENZIA NA WEBE">
+                            <input type="hidden" name="_captcha" value="false">
+
+                            <div class="mb-3">
+                                <label class="text-white small">Vaše hodnotenie:</label>
+                                <div class="star-rating">
+                                    <input type="radio" id="star5" name="rating" value="5" checked><label for="star5" title="5 hviezd"><i class="fas fa-star"></i></label>
+                                    <input type="radio" id="star4" name="rating" value="4"><label for="star4" title="4 hviezdy"><i class="fas fa-star"></i></label>
+                                    <input type="radio" id="star3" name="rating" value="3"><label for="star3" title="3 hviezdy"><i class="fas fa-star"></i></label>
+                                    <input type="radio" id="star2" name="rating" value="2"><label for="star2" title="2 hviezdy"><i class="fas fa-star"></i></label>
+                                    <input type="radio" id="star1" name="rating" value="1"><label for="star1" title="1 hviezda"><i class="fas fa-star"></i></label>
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <input type="text" name="name" id="reviewName" class="form-control border-0 py-3" placeholder="Vaše meno" required>
+                            </div>
+                            <div class="mb-3">
+                                <textarea name="message" id="reviewMsg" class="form-control border-0 py-3" rows="3" placeholder="Vaša skúsenosť..." required></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-light w-100 fw-bold text-primary py-3">Odoslať a zverejniť</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -602,13 +610,7 @@
                     <ul class="list-unstyled text-white-50">
                         <li class="mb-3 d-flex align-items-center"><i class="fas fa-check-circle text-warning me-3 fa-lg"></i> Dostupné v Prievidzi a okolí</li>
                         <li class="mb-3 d-flex align-items-center"><i class="fas fa-check-circle text-warning me-3 fa-lg"></i> Jednoduché objednanie cez appku</li>
-                        <li class="mb-3 d-flex align-items-center"><i class="fas fa-check-circle text-warning me-3 fa-lg"></i> Férové ceny a transparentnosť</li>
                     </ul>
-                    
-                    <p class="mt-4 fst-italic text-white border-start border-warning border-4 ps-3">
-                        "Naše autá sú vždy čisté a vodiči jazdia s úsmevom. To je štandard Chill Taxi."
-                    </p>
-
                     <div class="bolt-contact-box">
                         <h5 class="mb-2 text-white">Máte otázky alebo problém s objednávkou?</h5>
                         <p class="small text-white-50 mb-3">Sme tu pre vás. Zavolajte nám.</p>
@@ -668,9 +670,7 @@
         <div class="container">
             <div class="row gy-5">
                 <div class="col-lg-4">
-                    <span class="logo-text text-white" style="filter: brightness(0) invert(1); margin-bottom: 25px; display:inline-block;">
-                        CHILL TAXI
-                    </span>
+                    <span class="logo-text text-white" style="filter: brightness(0) invert(1); margin-bottom: 25px; display:inline-block;">CHILL TAXI</span>
                     <p>Profesionálna taxislužba v Prievidzi a okolí. Špecialista na letiskové transfery a partner platformy Bolt.</p>
                 </div>
                 <div class="col-lg-4 offset-lg-1">
@@ -688,7 +688,7 @@
                 </div>
             </div>
             <div class="border-top border-secondary mt-5 pt-4 text-center">
-                <small>&copy; 2023 Chill Taxi. Všetky práva vyhradené.</small>
+                <small>&copy; 2026 Chill Taxi. Všetky práva vyhradené.</small>
             </div>
         </div>
     </footer>
@@ -699,9 +699,7 @@
                 <div class="col-lg-8 mb-3 mb-lg-0">
                     <h5 class="fw-bold text-primary mb-2"><i class="fas fa-cookie-bite text-warning me-2"></i> Súkromie a Cookies</h5>
                     <p class="small text-muted mb-0">
-                        Tento web používa súbory cookies na zlepšenie vášho zážitku. Používaním stránky a odoslaním formulárov súhlasíte so 
-                        <strong>spracovaním osobných údajov</strong> v súlade s nariadením GDPR.
-                        Vaše údaje sú u nás v bezpečí.
+                        Tento web používa súbory cookies na zlepšenie vášho zážitku. Používaním stránky súhlasíte s GDPR.
                     </p>
                 </div>
                 <div class="col-lg-4 text-lg-end">
@@ -734,10 +732,12 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // Inicializácia AOS s vypnutím pre mobily
         AOS.init({
             duration: 800,
             offset: 100,
-            once: true
+            once: true,
+            disable: 'mobile' 
         });
 
         // Navbar scroll efekt
@@ -749,12 +749,12 @@
             }
         });
 
-        // --- COOKIE LOGIC ---
+        // --- COOKIE LOGIC (Okamžité zobrazenie) ---
         document.addEventListener("DOMContentLoaded", function() {
             if (!localStorage.getItem("chillTaxiCookiesAccepted")) {
                 setTimeout(function() {
                     document.getElementById("cookie-consent").classList.add("show");
-                }, 1000);
+                }, 100); 
             }
         });
 
@@ -763,21 +763,65 @@
             localStorage.setItem("chillTaxiCookiesAccepted", "true");
         }
 
-        // --- PROMO BOX LOGIC (NENÁPADNÉ) ---
+        // --- PROMO BOX LOGIC (RESET KEY pre istotu) ---
         document.addEventListener("DOMContentLoaded", function() {
-            const promoSeen = localStorage.getItem("chillTaxiPromoSeen");
+            const promoSeen = localStorage.getItem("chillTaxiPromoSeen_v2");
             const now = new Date().getTime();
             
             if (!promoSeen || (now - promoSeen > 86400000)) {
                 setTimeout(function() {
                     document.getElementById("promo-box").classList.add("active");
-                }, 5000); 
+                }, 3000); 
             }
         });
 
         function closePromo() {
             document.getElementById("promo-box").classList.remove("active");
-            localStorage.setItem("chillTaxiPromoSeen", new Date().getTime());
+            localStorage.setItem("chillTaxiPromoSeen_v2", new Date().getTime());
+        }
+
+        // --- LOGIKA PRE OKAMŽITÉ ZOBRAZENIE RECENZIE ---
+        const reviewForm = document.getElementById('reviewForm');
+        if(reviewForm) {
+            reviewForm.addEventListener('submit', function(e) {
+                e.preventDefault(); // Zastaví refresh stránky
+
+                // 1. Získanie údajov z formulára
+                const name = document.getElementById('reviewName').value;
+                const msg = document.getElementById('reviewMsg').value;
+                const starsInput = document.querySelector('input[name="rating"]:checked');
+                const rating = starsInput ? starsInput.value : 5;
+
+                // 2. Vytvorenie HTML novej recenzie
+                let starsHtml = '';
+                for(let i=0; i<rating; i++) starsHtml += '<i class="fas fa-star"></i>';
+
+                const newReviewHtml = `
+                    <div class="review-card" style="background: white; border-radius: 20px; padding: 25px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-bottom: 20px; border-left: 5px solid #f8b400; animation: fadeIn 0.5s;">
+                        <div class="stars" style="color: #f8b400; margin-bottom: 10px;">${starsHtml}</div>
+                        <p class="mb-2">"${msg}"</p>
+                        <small class="text-muted fw-bold">- ${name} (Práve teraz)</small>
+                    </div>
+                `;
+
+                // 3. Vloženie na začiatok zoznamu
+                const container = document.getElementById('reviews-container');
+                container.insertAdjacentHTML('afterbegin', newReviewHtml);
+
+                // 4. Odoslanie dát na email (na pozadí)
+                const formData = new FormData(reviewForm);
+                // DÔLEŽITÉ: Tu používame FormSubmit AJAX endpoint, aby nás nepresmerovalo
+                fetch("https://formsubmit.co/ajax/chilltaxipd@gmail.com", {
+                    method: "POST",
+                    body: formData
+                })
+                .then(response => console.log("Odoslané na mail"))
+                .catch(error => console.log("Chyba mailu", error));
+
+                // 5. Vyčistenie a poďakovanie
+                reviewForm.reset();
+                alert("Ďakujeme! Vaša recenzia bola pridaná.");
+            });
         }
     </script>
 </body>
