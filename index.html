@@ -190,7 +190,6 @@
             color: white;
             position: relative;
             overflow: hidden;
-            /* Extra margin pre oddelenie od sekcie nad ním */
             margin-top: 50px;
         }
         #bolt-service h2 { color: white; }
@@ -307,6 +306,60 @@
         footer h5 { color: white; margin-bottom: 20px; }
         footer a { color: #aaa; text-decoration: none; }
         footer a:hover { color: var(--accent-color); }
+
+        /* --- COOKIE BANNER --- */
+        .cookie-banner {
+            position: fixed;
+            bottom: -100%; /* Skryté */
+            left: 0;
+            width: 100%;
+            background: white;
+            padding: 25px 0;
+            box-shadow: 0 -5px 25px rgba(0,0,0,0.1);
+            z-index: 9999;
+            transition: bottom 0.5s ease-in-out;
+            border-top: 4px solid var(--accent-color);
+        }
+        .cookie-banner.show {
+            bottom: 0;
+        }
+
+        /* --- PROMO TOAST (Nový, vpravo dole) --- */
+        .promo-box {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 320px;
+            background: white;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            border-radius: 15px;
+            padding: 25px;
+            z-index: 9990; /* Aby bol nad obsahom, ale pod cookie lištou ak by sa stretli */
+            border-left: 5px solid var(--accent-color);
+            transform: translateX(120%); /* Skryté vpravo */
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: block;
+        }
+        .promo-box.active {
+            transform: translateX(0); /* Vysunuté */
+        }
+        .promo-box .close-btn {
+            position: absolute;
+            top: 10px; right: 15px;
+            font-size: 1.2rem;
+            color: #ccc;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .promo-box .close-btn:hover { color: var(--text-dark); }
+        
+        @media(max-width: 576px) {
+            .promo-box {
+                width: 90%;
+                right: 5%;
+                bottom: 20px;
+            }
+        }
 
     </style>
 </head>
@@ -501,16 +554,19 @@
                                 </div>
                             </div>
                             <div class="col-lg-7">
-                                <form class="p-3 bg-light rounded-4">
+                                <form action="https://formsubmit.co/chilltaxipd@gmail.com" method="POST" class="p-3 bg-light rounded-4">
+                                    <input type="hidden" name="_subject" value="NOVÝ ZÁUJEMCA: Vodič Chill Taxi">
+                                    <input type="hidden" name="_captcha" value="false">
+                                    <input type="hidden" name="_template" value="table">
                                     <div class="row g-3">
                                         <div class="col-md-6">
-                                            <input type="text" class="form-control border-0 py-3" placeholder="Meno a Priezvisko" required>
+                                            <input type="text" name="meno" class="form-control border-0 py-3" placeholder="Meno a Priezvisko" required>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="tel" class="form-control border-0 py-3" placeholder="Tel. číslo" required>
+                                            <input type="tel" name="telefon" class="form-control border-0 py-3" placeholder="Tel. číslo" required>
                                         </div>
                                         <div class="col-12">
-                                            <input type="text" class="form-control border-0 py-3" placeholder="Typ auta (Model a rok výroby)">
+                                            <input type="text" name="auto" class="form-control border-0 py-3" placeholder="Typ auta (Model a rok výroby)">
                                         </div>
                                         <div class="col-12">
                                             <button type="submit" class="btn btn-primary-custom w-100">Odoslať záujem</button>
@@ -552,6 +608,44 @@
         </div>
     </footer>
 
+    <div id="cookie-consent" class="cookie-banner">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-8 mb-3 mb-lg-0">
+                    <h5 class="fw-bold text-primary mb-2"><i class="fas fa-cookie-bite text-warning me-2"></i> Súkromie a Cookies</h5>
+                    <p class="small text-muted mb-0">
+                        Tento web používa súbory cookies na zlepšenie vášho zážitku. Používaním stránky a odoslaním formulárov súhlasíte so 
+                        <strong>spracovaním osobných údajov</strong> v súlade s nariadením GDPR.
+                        Vaše údaje sú u nás v bezpečí.
+                    </p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <button class="btn btn-primary-custom btn-sm px-4" onclick="acceptCookies()">
+                        Rozumiem a súhlasím
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="promo-box" class="promo-box">
+        <span class="close-btn" onclick="closePromo()">&times;</span>
+        <div class="d-flex align-items-start">
+            <div class="me-3 pt-1">
+                <i class="fas fa-plane-departure text-warning fs-3"></i>
+            </div>
+            <div>
+                <h6 class="fw-bold text-primary mb-1">Chystáš sa preč? ✈️</h6>
+                <p class="small text-muted mb-3" style="line-height: 1.4;">
+                    Zarezervuj si transfer na letisko vopred a cestuj bez starostí.
+                </p>
+                <a href="#pricing" onclick="closePromo()" class="btn btn-outline-primary btn-sm rounded-pill fw-bold" style="font-size: 0.8rem;">
+                    Pozrieť cenník
+                </a>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
@@ -569,6 +663,40 @@
                 document.querySelector('.navbar').classList.remove('shadow-sm');
             }
         });
+
+        // --- COOKIE LOGIC ---
+        document.addEventListener("DOMContentLoaded", function() {
+            if (!localStorage.getItem("chillTaxiCookiesAccepted")) {
+                setTimeout(function() {
+                    document.getElementById("cookie-consent").classList.add("show");
+                }, 1000);
+            }
+        });
+
+        function acceptCookies() {
+            document.getElementById("cookie-consent").classList.remove("show");
+            localStorage.setItem("chillTaxiCookiesAccepted", "true");
+        }
+
+        // --- PROMO BOX LOGIC (NENÁPADNÉ) ---
+        document.addEventListener("DOMContentLoaded", function() {
+            // Skontrolujeme, či už dnes videl promo
+            const promoSeen = localStorage.getItem("chillTaxiPromoSeen");
+            const now = new Date().getTime();
+            
+            // Ak ho nevidel, alebo ubehlo 24 hodín (86400000 ms) od posledného zavretia
+            if (!promoSeen || (now - promoSeen > 86400000)) {
+                setTimeout(function() {
+                    document.getElementById("promo-box").classList.add("active");
+                }, 5000); // Zobrazí sa jemne po 5 sekundách
+            }
+        });
+
+        function closePromo() {
+            document.getElementById("promo-box").classList.remove("active");
+            // Uložíme aktuálny čas, kedy to zavrel
+            localStorage.setItem("chillTaxiPromoSeen", new Date().getTime());
+        }
     </script>
 </body>
 </html>
