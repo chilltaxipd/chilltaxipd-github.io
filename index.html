@@ -268,14 +268,34 @@
             color: var(--primary-color);
             margin: 15px 0;
         }
+
+        /* --- REZERVÁCIA (CALENDLY) --- */
+        #reservation {
+            background-color: var(--bg-light);
+        }
+        .reservation-box {
+            background: white;
+            padding: 20px;
+            border-radius: 25px;
+            box-shadow: var(--box-shadow);
+            border-top: 5px solid var(--primary-color);
+            overflow: hidden; /* Aby iframe nepretekal */
+        }
+        .warning-box {
+            background: rgba(248, 180, 0, 0.15);
+            border-left: 4px solid var(--accent-color);
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
         
         /* --- RECRUITMENT --- */
         #recruitment {
-            background-color: var(--bg-light);
+            background-color: white;
             position: relative;
         }
         .recruit-box {
-            background: white;
+            background: var(--bg-light);
             padding: 50px;
             border-radius: 30px;
             box-shadow: var(--box-shadow);
@@ -324,7 +344,7 @@
             bottom: 0;
         }
 
-        /* --- PROMO TOAST (Nový, vpravo dole) --- */
+        /* --- PROMO TOAST --- */
         .promo-box {
             position: fixed;
             bottom: 30px;
@@ -334,7 +354,7 @@
             box-shadow: 0 10px 40px rgba(0,0,0,0.15);
             border-radius: 15px;
             padding: 25px;
-            z-index: 9990; /* Aby bol nad obsahom, ale pod cookie lištou ak by sa stretli */
+            z-index: 9990; 
             border-left: 5px solid var(--accent-color);
             transform: translateX(120%); /* Skryté vpravo */
             transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -377,6 +397,7 @@
                 <ul class="navbar-nav ms-auto align-items-center">
                     <li class="nav-item"><a class="nav-link" href="#airport-transfer">Letiskové transfery</a></li>
                     <li class="nav-item"><a class="nav-link" href="#pricing">Cenník</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#reservation">Rezervácia</a></li>
                     <li class="nav-item"><a class="nav-link" href="#bolt-service">Bolt</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Kontakt</a></li>
                     <li class="nav-item ms-3">
@@ -396,13 +417,13 @@
                     <h1>Tvoja cesta na letisko začína u nás.</h1>
                     <p class="lead text-muted mb-4">Spoľahlivé letiskové transfery z Prievidze a okolia. Presnosť a komfort sú pre nás prioritou.</p>
                     <div class="d-flex gap-3 justify-content-lg-start justify-content-center">
-                        <a href="#contact" class="btn btn-primary-custom">Objednať odvoz</a>
+                        <a href="#reservation" class="btn btn-primary-custom">Objednať odvoz</a>
                         <a href="#pricing" class="btn btn-outline-primary rounded-pill px-4 py-3 fw-bold">Pozrieť cenník</a>
                     </div>
                 </div>
                 <div class="col-lg-7">
                     <div class="car-container">
-                        <img src="https://media.discordapp.net/attachments/1456278653565534352/1457414223339716852/Peugeot-5008-2010-1280-1b59b6ce7099886080a8614370da421936.png?ex=695bea44&is=695a98c4&hm=54985189fb40b3bd9fb03bba63fdc273d41af3900ff2ba6a6a82f67e78e4f2d9&=&format=webp&quality=lossless" alt="Chill Taxi Peugeot 5008" class="peugeot-car">
+                        <img src="https://github.com/chilltaxipd/chilltaxipd-github.io/blob/main/peugeot.png?raw=true" alt="Chill Taxi Peugeot 5008" class="peugeot-car">
                     </div>
                 </div>
             </div>
@@ -466,7 +487,7 @@
                             <li><i class="fas fa-check text-primary me-2"></i> Batožina v cene</li>
                             <li><i class="fas fa-check text-primary me-2"></i> Jednosmerná cesta</li>
                         </ul>
-                        <a href="#contact" class="btn btn-outline-primary rounded-pill w-100">Objednať</a>
+                        <a href="#reservation" class="btn btn-outline-primary rounded-pill w-100">Objednať</a>
                     </div>
                 </div>
                 
@@ -480,7 +501,7 @@
                             <li><i class="fas fa-check text-primary me-2"></i> Batožina v cene</li>
                             <li><i class="fas fa-check text-primary me-2"></i> Komfortná jazda</li>
                         </ul>
-                        <a href="#contact" class="btn btn-primary-custom w-100">Objednať</a>
+                        <a href="#reservation" class="btn btn-primary-custom w-100">Objednať</a>
                     </div>
                 </div>
 
@@ -493,12 +514,44 @@
                             <li><i class="fas fa-check text-primary me-2"></i> Batožina v cene</li>
                             <li><i class="fas fa-check text-primary me-2"></i> Jednosmerná cesta</li>
                         </ul>
-                        <a href="#contact" class="btn btn-outline-primary rounded-pill w-100">Objednať</a>
+                        <a href="#reservation" class="btn btn-outline-primary rounded-pill w-100">Objednať</a>
                     </div>
                 </div>
             </div>
             <div class="text-center mt-4 text-muted small">
                 Ostatné destinácie naceňujeme individuálne. Kontaktujte nás.
+            </div>
+        </div>
+    </section>
+
+    <section id="reservation" class="section-padding">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8" data-aos="fade-up">
+                    <div class="text-center mb-4">
+                        <h5 class="text-uppercase text-primary">Plánovanie cesty</h5>
+                        <h2 class="mb-3">Záväzná rezervácia termínu</h2>
+                        <p class="text-muted">Vyberte si voľný termín v kalendári. Systém vám ukáže len reálne dostupné časy.</p>
+                    </div>
+
+                    <div class="reservation-box">
+                        <div class="warning-box">
+                            <div class="d-flex">
+                                <i class="fas fa-exclamation-triangle text-warning fs-3 me-3 mt-1"></i>
+                                <div>
+                                    <h5 class="fw-bold text-dark mb-1">Dôležité: Plánujte s rezervou!</h5>
+                                    <p class="mb-0 text-muted small">
+                                        Cesta do Bratislavy alebo Viedne môže trvať 2 až 3 hodiny. 
+                                        <strong>Odporúčame rezervovať si čas vyzdvihnutia aspoň 5 hodín pred vaším odletom.</strong>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="calendly-inline-widget" data-url="https://calendly.com/naodova1983/rezervacia-chill-taxi" style="min-width:320px;height:700px;"></div>
+                        <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+                        </div>
+                </div>
             </div>
         </div>
     </section>
@@ -542,7 +595,7 @@
             <div class="row justify-content-center">
                 <div class="col-lg-10">
                     <div class="recruit-box">
-                        <img src="https://media.discordapp.net/attachments/1456278653565534352/1457443406040272916/pointing-hand.png?ex=695c0571&is=695ab3f1&hm=5527352e1bcc5c91a6fee3eee2d93e6ad9950d66959e15c4a981a8de9f9db7f9&=&format=webp&quality=lossless" alt="Ukazujúca ruka" class="hand-image" data-aos="fade-right">
+                        <img src="https://github.com/chilltaxipd/chilltaxipd-github.io/blob/main/pointing-hand.png?raw=true" alt="Ukazujúca ruka" class="hand-image" data-aos="fade-right">
                         
                         <div class="row align-items-center">
                             <div class="col-lg-5 mb-4 mb-lg-0">
@@ -554,19 +607,19 @@
                                 </div>
                             </div>
                             <div class="col-lg-7">
-                                <form action="https://formsubmit.co/chilltaxipd@gmail.com" method="POST" class="p-3 bg-light rounded-4">
+                                <form action="https://formsubmit.co/chilltaxipd@gmail.com" method="POST" class="p-3 bg-white rounded-4 border">
                                     <input type="hidden" name="_subject" value="NOVÝ ZÁUJEMCA: Vodič Chill Taxi">
                                     <input type="hidden" name="_captcha" value="false">
                                     <input type="hidden" name="_template" value="table">
                                     <div class="row g-3">
                                         <div class="col-md-6">
-                                            <input type="text" name="meno" class="form-control border-0 py-3" placeholder="Meno a Priezvisko" required>
+                                            <input type="text" name="meno" class="form-control border-0 py-3 bg-light" placeholder="Meno a Priezvisko" required>
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="tel" name="telefon" class="form-control border-0 py-3" placeholder="Tel. číslo" required>
+                                            <input type="tel" name="telefon" class="form-control border-0 py-3 bg-light" placeholder="Tel. číslo" required>
                                         </div>
                                         <div class="col-12">
-                                            <input type="text" name="auto" class="form-control border-0 py-3" placeholder="Typ auta (Model a rok výroby)">
+                                            <input type="text" name="auto" class="form-control border-0 py-3 bg-light" placeholder="Typ auta (Model a rok výroby)">
                                         </div>
                                         <div class="col-12">
                                             <button type="submit" class="btn btn-primary-custom w-100">Odoslať záujem</button>
@@ -585,7 +638,7 @@
         <div class="container">
             <div class="row gy-5">
                 <div class="col-lg-4">
-                    <img src="https://media.discordapp.net/attachments/1456278653565534352/1457414183703543941/489738147_122096549144836047_5396000157560965250_n.jpg?ex=695bea3a&is=695a98ba&hm=1563764d1bb20beeb360d3c5cc2ac3f2fa0785e26faad4e06dcbe7d495dd0a4d&=&format=webp&width=960&height=960" alt="Chill Taxi Logo" style="height: 40px; filter: brightness(0) invert(1); margin-bottom: 25px;">
+                    <img src="https://github.com/chilltaxipd/chilltaxipd-github.io/blob/main/logo.png?raw=true" alt="Chill Taxi Logo" style="height: 40px; filter: brightness(0) invert(1); margin-bottom: 25px;">
                     <p>Profesionálna taxislužba v Prievidzi a okolí. Špecialista na letiskové transfery a partner platformy Bolt.</p>
                 </div>
                 <div class="col-lg-4 offset-lg-1">
@@ -639,8 +692,8 @@
                 <p class="small text-muted mb-3" style="line-height: 1.4;">
                     Zarezervuj si transfer na letisko vopred a cestuj bez starostí.
                 </p>
-                <a href="#pricing" onclick="closePromo()" class="btn btn-outline-primary btn-sm rounded-pill fw-bold" style="font-size: 0.8rem;">
-                    Pozrieť cenník
+                <a href="#reservation" onclick="closePromo()" class="btn btn-outline-primary btn-sm rounded-pill fw-bold" style="font-size: 0.8rem;">
+                    Rezervovať termín
                 </a>
             </div>
         </div>
@@ -680,21 +733,18 @@
 
         // --- PROMO BOX LOGIC (NENÁPADNÉ) ---
         document.addEventListener("DOMContentLoaded", function() {
-            // Skontrolujeme, či už dnes videl promo
             const promoSeen = localStorage.getItem("chillTaxiPromoSeen");
             const now = new Date().getTime();
             
-            // Ak ho nevidel, alebo ubehlo 24 hodín (86400000 ms) od posledného zavretia
             if (!promoSeen || (now - promoSeen > 86400000)) {
                 setTimeout(function() {
                     document.getElementById("promo-box").classList.add("active");
-                }, 5000); // Zobrazí sa jemne po 5 sekundách
+                }, 5000); 
             }
         });
 
         function closePromo() {
             document.getElementById("promo-box").classList.remove("active");
-            // Uložíme aktuálny čas, kedy to zavrel
             localStorage.setItem("chillTaxiPromoSeen", new Date().getTime());
         }
     </script>
