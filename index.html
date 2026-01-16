@@ -318,11 +318,10 @@
             transform: translateX(0);
         }
         
-        /* Špecifické nastavenie pre mobily */
         @media(max-width: 576px) {
             .promo-box {
-                width: 90%; /* Nie na celú šírku, ale takmer */
-                left: 5%; /* Centrovanie: 5% zľava + 90% šírka = 5% sprava */
+                width: 90%; 
+                left: 5%; 
                 right: auto;
                 bottom: 20px;
             }
@@ -336,7 +335,7 @@
             cursor: pointer;
         }
 
-        /* --- ŠTÝLY PRE RECENZIE --- */
+        /* --- ŠTÝLY PRE RECENZIE (OPRAVA HVIEZD) --- */
         #reviews { background-color: #f8fafd; }
         .review-card {
             background: white; border-radius: 20px; padding: 25px;
@@ -351,15 +350,25 @@
             border-radius: 20px;
         }
         
-        /* Star Rating System */
+        /* Star Rating System - OPRAVA PRE MOBILY */
         .star-rating {
-            direction: rtl; display: inline-flex; font-size: 2rem; padding: 0; border: none;
+            direction: rtl; 
+            display: inline-flex; 
+            font-size: 2rem; 
+            padding: 0; 
+            border: none;
+            flex-wrap: nowrap; /* ZABRÁNI ODSOKOVANIU HVIEZD */
         }
         .star-rating input { display: none; }
         .star-rating label { color: #ddd; cursor: pointer; padding: 0 5px; transition: color 0.2s; }
         .star-rating input:checked ~ label,
         .star-rating label:hover,
         .star-rating label:hover ~ label { color: var(--accent-color); }
+
+        /* Zmenšenie hviezd na malých displejoch */
+        @media (max-width: 400px) {
+            .star-rating { font-size: 1.5rem; }
+        }
 
     </style>
 </head>
@@ -528,10 +537,8 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="calendly-inline-widget" data-url="https://calendly.com/naodova1983/rezervacia-chill-taxi" style="min-width:320px;height:700px;"></div>
                         <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
-
                     </div>
                 </div>
             </div>
